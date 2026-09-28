@@ -23,8 +23,7 @@
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font:400 1rem/1.7 var(--body);
   background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-  background-size:56px 56px;background-attachment:fixed;
-  -webkit-mask-image:none}
+  background-size:56px 56px;background-attachment:fixed}
 body::before{content:"";position:fixed;inset:0;background:radial-gradient(ellipse at 30% 0%,transparent 0,var(--bg) 75%);pointer-events:none;z-index:0}
 main,header,footer{position:relative;z-index:1}
 a{color:inherit;text-decoration:none}
@@ -40,7 +39,7 @@ nav ul{display:flex;gap:1.6rem;list-style:none;padding:0;color:var(--muted);font
 nav ul a:hover{color:var(--text)}
 
 /* hero */
-.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:3rem;align-items:center;padding:5rem 0 6rem}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:3rem;align-items:center;padding:4rem 0 5rem}
 .hero h1{font:700 clamp(2.4rem,5.5vw,4rem)/1.08 var(--head);letter-spacing:-.01em;margin-bottom:1.2rem}
 .hero p{color:var(--muted);max-width:46ch;margin-bottom:2rem}
 .btns{display:flex;gap:.9rem;flex-wrap:wrap}
@@ -50,17 +49,27 @@ nav ul a:hover{color:var(--text)}
 .btn.ghost{border:1px solid var(--line);color:var(--text)}
 .btn.ghost:hover{border-color:var(--lilac)}
 
-/* kartu kode: elemen utama */
-.code{position:relative;background:rgba(40,49,72,.72);border:1px solid var(--line);border-radius:18px;
+/* area foto profil */
+.visual{position:relative;padding-bottom:7rem}
+.photo{position:relative;width:min(300px,78%);aspect-ratio:4/5;margin-left:auto;border-radius:24px;overflow:hidden;
+  background:var(--surface);border:1px solid var(--line);box-shadow:0 30px 70px -30px rgba(169,166,216,.35)}
+.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.ph{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;gap:.7rem;padding:1rem;
+  color:var(--muted);font-size:.9rem;text-align:center}
+.ph svg{width:84px;opacity:.55}
+
+/* kartu kode */
+.code{position:relative;background:rgba(40,49,72,.78);border:1px solid var(--line);border-radius:18px;
   padding:1.4rem 1.5rem 1.6rem;backdrop-filter:blur(10px);font:.88rem/1.9 ui-monospace,Consolas,monospace;
   box-shadow:0 30px 70px -30px rgba(147,197,207,.25)}
+.visual .code{position:absolute;left:0;bottom:0;width:74%}
 .code::before{content:"";position:absolute;width:260px;height:260px;right:-70px;top:-90px;border-radius:50%;
   background:radial-gradient(circle,rgba(169,166,216,.35),transparent 68%);z-index:-1;animation:melayang 9s ease-in-out infinite alternate}
 .dots{display:flex;gap:6px;margin-bottom:1rem}
 .dots i{width:10px;height:10px;border-radius:50%;background:var(--line)}
-.k{color:var(--lilac)}.s{color:var(--mint)}.c{color:var(--muted)}
+.k{color:var(--lilac)}.s{color:var(--mint)}
 .hero>*{animation:masuk .9s ease both}
-.hero>.code{animation-delay:.2s}
+.hero>.visual{animation-delay:.2s}
 @keyframes masuk{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 @keyframes melayang{to{transform:translate(-24px,26px)}}
 
@@ -77,7 +86,7 @@ h2{font:600 clamp(1.7rem,3.5vw,2.3rem) var(--head);margin-bottom:.6rem}
 .skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.4rem 2.4rem}
 .skill div{display:flex;justify-content:space-between;margin-bottom:.45rem;font-size:.95rem}
 .skill em{font-style:normal;color:var(--muted)}
-.bar{height:6px;background:var(--surface);border-radius:9px;overflow:hidden}
+.bar{height:6px;background:var(--surface);border-radius:9px;overflow:hidden;display:block}
 .bar b{display:block;height:100%;border-radius:9px;background:linear-gradient(90deg,var(--lilac),var(--mint))}
 
 /* proyek */
@@ -99,6 +108,9 @@ footer{padding:2rem 0 3rem;color:var(--muted);font-size:.9rem;text-align:center;
 @media(max-width:800px){
   .hero,.about{grid-template-columns:1fr;gap:2.2rem}
   .hero{padding:3rem 0 4rem}
+  .visual{padding-bottom:0}
+  .photo{margin-inline:auto}
+  .visual .code{position:relative;width:92%;margin:-3rem auto 0}
   nav ul{gap:1rem;font-size:.88rem}
 }
 @media(prefers-reduced-motion:reduce){
@@ -130,14 +142,32 @@ footer{padding:2rem 0 3rem;color:var(--muted);font-size:.9rem;text-align:center;
         <a class="btn ghost" href="#kontak">Hubungi saya</a>
       </div>
     </div>
-    <div class="code" aria-hidden="true">
-      <div class="dots"><i></i><i></i><i></i></div>
-      <div><span class="k">const</span> prasetyo = {</div>
-      <div>&nbsp;&nbsp;sekolah: <span class="s">"SMK Nusantara 1"</span>,</div>
-      <div>&nbsp;&nbsp;jurusan: <span class="s">"RPL"</span>,</div>
-      <div>&nbsp;&nbsp;fokus: [<span class="s">"web"</span>, <span class="s">"database"</span>],</div>
-      <div>&nbsp;&nbsp;status: <span class="s">"terus belajar"</span></div>
-      <div>};</div></div>
+
+    <div class="visual">
+      <!-- ====== TEMPAT FOTO ======
+           1. Simpan fotomu dengan nama foto.jpg di folder yang sama dengan file HTML ini
+           2. Atau ganti src="foto.jpg" dengan nama/alamat fotomu
+           Ukuran ideal: potret 4:5, misalnya 800 x 1000 px -->
+      <div class="photo">
+        <div class="ph">
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <circle cx="32" cy="24" r="11"/>
+            <path d="M10 56c2-12 11-18 22-18s20 6 22 18"/>
+          </svg>
+          <span>Taruh foto di sini</span>
+        </div>
+        <img src="foto.jpg" alt="Foto Prasetyo Dwi Santoso" onerror="this.remove()">
+      </div>
+
+      <div class="code" aria-hidden="true">
+        <div class="dots"><i></i><i></i><i></i></div>
+        <div><span class="k">const</span> prasetyo = {</div>
+        <div>&nbsp;&nbsp;sekolah: <span class="s">"SMK Nusantara 1"</span>,</div>
+        <div>&nbsp;&nbsp;jurusan: <span class="s">"RPL"</span>,</div>
+        <div>&nbsp;&nbsp;fokus: [<span class="s">"web"</span>, <span class="s">"database"</span>],</div>
+        <div>&nbsp;&nbsp;status: <span class="s">"terus belajar"</span></div>
+        <div>};</div>
+      </div>
     </div>
   </div>
 
@@ -145,7 +175,7 @@ footer{padding:2rem 0 3rem;color:var(--muted);font-size:.9rem;text-align:center;
     <div class="wrap about">
       <div>
         <h2>Tentang saya</h2>
-        <p class="lead" style="margin-bottom:0">Saya tertarik pada pemrograman web dan pengelolaan basis data. Di sekolah saya belajar membuat aplikasi dari perancangan sampai diuji, dan saya senang mengerjakannya bersama tim. <!-- Ubah paragraf ini dengan cerita kamu sendiri --></p>
+        <p class="lead" style="margin-bottom:0">Saya tertarik pada pemrograman web dan pengelolaan basis data. Di sekolah saya belajar membuat aplikasi dari perancangan sampai diuji, dan saya senang mengerjakannya bersama tim.</p>
       </div>
       <ul class="facts">
         <li><span>Nama</span> Prasetyo Dwi Santoso</li>
@@ -173,7 +203,7 @@ footer{padding:2rem 0 3rem;color:var(--muted);font-size:.9rem;text-align:center;
 
   <section id="proyek">
     <div class="wrap">
-      <h2>Proyek & Pencapaian </h2>
+      <h2>Proyek &amp; Pencapaian</h2>
       <p class="lead">Hasil Pencapaian Saya selama sekolah di smk nusantara 1 kota tangerang hingga sekarang</p>
       <div class="projects">
         <article class="card">
@@ -200,9 +230,9 @@ footer{padding:2rem 0 3rem;color:var(--muted);font-size:.9rem;text-align:center;
       <h2>Kontak</h2>
       <p class="lead">Terbuka untuk magang, kolaborasi, atau sekadar berdiskusi soal pemrograman.</p>
       <div class="contact">
-        <a href="mailto:nama@email.com"><small>Email</small>sitirokayah.sr012@gmail.com</a>
-        <a href="https://github.com/" target="_blank" rel="noopener"><small>GitHub</small>github.com/prasmoretti</a>
-        <a href="https://instagram.com/" target="_blank" rel="noopener"><small>Instagram</small>@prasmoretti</a>
+        <a href="mailto:sitirokayah.sr012@gmail.com"><small>Email</small>sitirokayah.sr012@gmail.com</a>
+        <a href="https://github.com/prasmoretti" target="_blank" rel="noopener"><small>GitHub</small>github.com/prasmoretti</a>
+        <a href="https://instagram.com/prasmoretti" target="_blank" rel="noopener"><small>Instagram</small>@prasmoretti</a>
       </div>
     </div>
   </section>
